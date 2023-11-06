@@ -253,6 +253,10 @@ int nta_check_session_content(nta_incoming_t *irq,
 	  !strcasecmp(sip->sip_content_encoding->k_items[0], "deflate"))
     acceptable_encoding = 1;
 
+  if (c && !strcasecmp(c->c_type, "application/rs-metadata+xml") &&
+      cd && !strcasecmp(cd->cd_type, "recording-session"))
+    return 0;
+
   if (acceptable_type && acceptable_encoding)
     return 0;
 
